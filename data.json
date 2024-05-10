@@ -1,0 +1,186 @@
+{
+    "records": [
+        {
+            "id": "rec0B7kz8PPfuUI5x",
+            "createdTime": "2024-04-28T11:41:52.000Z",
+            "fields": {
+                "Title": "Luscus 2021",
+                "ArtID": "Lus0356",
+                "Year": 2021,
+                "Date Group": "2021-Present",
+                "Digital/Painting": "Digital",
+                "Image/Video": [
+                    {
+                        "id": "attr6uE7CjGU67WCk",
+                        "width": 450,
+                        "height": 800,
+                        "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/28vjcYwHuwTnuhC41hCTjg/V2vuoGelR78b0ANzDE4ZQXEiu_fi3GGIsIXuyz7ZuD0UbGzWc3zJ4IjOexEUGy_vposrhGVItHBqYPseVN9zm7TP0MOi9AxmIKS5BzNB9zBb0PfTg2T4G1ANPZPyiHffKnF2OxSPSG3kBL6mQT0cvQ/QTGbtLUG8aQSqTJeX4yqL0VTAz6-0HhzCpp_rZmMLQ0",
+                        "filename": "Luscus 2021.jpg",
+                        "size": 32170,
+                        "type": "image/jpeg",
+                        "thumbnails": {
+                            "small": {
+                                "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/v_U7H7gsNcflfzCQOSNV3A/IshKEIFQGZcJErmeesU2M44d14mwkaW8MtHfEQrZyyNbLQhnr8CaAKSycPJQY27mExYYFdFADG0REqD2-jmNtAIHcLHwhweY7vKK_VMYQd7CueZVNhZqpQxDmoC0fi8ntCxFFNIPwdP29RMiOP_F1w/Q6vT4RAmH7dA6SRvhVPanAIRaU4Gvl1E3o1sungrk74",
+                                "width": 20,
+                                "height": 36
+                            },
+                            "large": {
+                                "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/bjV_9IHp7X-BYYn8F8kAoQ/ndJuU0wU71VJe822PT0dM5TWSKAbPsJbvQo7ykkSrFuDSWU2HDo753uFKW2vTU6yot_7mZjcQ1cFROcib_u3nW-__wFzHYx4lLxnTY426fI0HyvHWfFhtzC_5Dymr6iRE2jpY7T_AFABM8Epaa1Btw/qOnO-4jLA_pVFv_6YbpeHwdu9t-TQqFlWhiqqyVHLLk",
+                                "width": 450,
+                                "height": 800
+                            },
+                            "full": {
+                                "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/MM9yKAuoGRoQSKTcM9pS7A/EbVpzsDXH1DZpSKu_hn1Npg8EVCFDEhnIjVYKf6D1jqa6C-lwJC3du3T0FkU3pMZoli8uHBFWb00eyq0Sk6Qpj4NUvuBTfP9Bczgr18p7Q_hPEu2oOS0A8RBlwFSL3d2T3Q1gvBxfMu-RPNsjz3GxA/GzWDOytisSrCv6rx6iFcBYef7tTN3KtNsHR5vqhS82w",
+                                "width": 3000,
+                                "height": 3000
+                            }
+                        }
+                    }
+                ],
+                "Series": "Venus",
+                "Subject": [
+                    "Figurative"
+                ],
+                "Medium": "Digital Art _Video",
+                "Availability": "Painting Available"
+            }
+        },
+        {
+            "id": "rec0mcTEqxZlLgR9D",
+            "createdTime": "2024-04-28T11:41:52.000Z",
+            "fields": {
+                "Title": "Nympth at the Bath",
+                "ArtID": "Nym0360",
+                "Exhibition name": "LUSCUS",
+                "Year": 2021,
+                "Date Group": "2021-Present",
+                "Digital/Painting": "Painting",
+                "Image/Video": [
+                    {
+                        "id": "attNNfYyt5psftNzg",
+                        "width": 536,
+                        "height": 800,
+                        "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/Ey-rYWmWVrp9gK75vy8-fA/liw0G_PtZq0dbzF8v0XVEPWemUjyhho1r7kSNuJD_TtOFI7DyRQ2yWMGaCesdGxaEOyIwZ6ON7Hv-s68axfr1FZ230YPuqMzvh2KlSNRBRQ6N0Lj7TOAZO-WrjOqmvFusomvxTyQMqqkFaOKeP-2_g/5qOfvjQxi9RjKrNR5gH4Z0yw6J2QsAeOslgdsJfWESE",
+                        "filename": "Nympth at the Bath 2021.jpg",
+                        "size": 58236,
+                        "type": "image/jpeg",
+                        "thumbnails": {
+                            "small": {
+                                "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/j4TW6SGy5bMnJ08txUp_nw/hnTx7K7uqVX9jnzP1GraffznPX-OLfbyFRujQhJ1O8haDdJQaB9mTw1bCirB7YrNl9mAXKAZkNJyDw54HDcaOkWQFUDNvpfCUbAI8no0ccuUr7HqWp4GOrJ_n9d5ThXSwW6re-QwDty2_RQfzn06BA/E4W1nmdOaVBlGG1asyqET37jd9IEuQZh7mupOACFnC0",
+                                "width": 24,
+                                "height": 36
+                            },
+                            "large": {
+                                "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/kY3H0Jyzydz847XLQtGU6g/WdAaM5P59Yv8HiQBfG0RGl8JAKPY8pST85aXS7q-FMPftbweZkfZeiaDWuH0wkFaZ-arAGkaCtoEvU9PjjrFGmUFDd22lUjX6dgjzD_nPOaAg0kW7Rdg7OmZpyj8mo7MQfwCoJyVv66onXF4WHKeig/dRA8AU3uNFrw_AAbgo0eRC_UJ5rbHfqFEK9_2piaoto",
+                                "width": 512,
+                                "height": 764
+                            },
+                            "full": {
+                                "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/4fGNMjoJgc_kBosv6W3LXg/Lwhy0TGUYdvGhURUXBEVRb1i79kpZZ3AP-xfjYs2GVv96XLr6PJ2pqpjgAoDLfEcipvT_vmbKRqwWR_EJhIM0e0iYKgmxthGPxDH50UAX3efJxN4QAOeUSEBDjmdwyVjsMB1Uz5YD8wwuyPrIik7HA/qth11yuIHDW3zILfyvK65a2i5SKhAG4WAQDocy-0So8",
+                                "width": 3000,
+                                "height": 3000
+                            }
+                        }
+                    }
+                ],
+                "Series": "Venus",
+                "Subject": [
+                    "Figurative, Coloured"
+                ],
+                "Medium": "oil on canvas with tinted acrylic",
+                "Size": "60 x 40 cm",
+                "Availability": "Painting Sold -digital print available"
+            }
+        },
+        {
+            "id": "rec1KssoVoSDWYgbN",
+            "createdTime": "2024-04-28T11:41:52.000Z",
+            "fields": {
+                "Title": "Falling Flowers; Baroque ceiling #3",
+                "ArtID": "Fal0497",
+                "Year": 2010,
+                "Date Group": "2001-2010",
+                "Digital/Painting": "Painting",
+                "Image/Video": [
+                    {
+                        "id": "attrWBunDDuYbQg7y",
+                        "width": 4363,
+                        "height": 2475,
+                        "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/ujVgUOfff1O1YYbT8YSzMQ/reockzENPtiCWufGVY1Hhxm8vvoCS-yxKDVnCDoQFraH_a4gGhY77Nh9f1S32KEbyLVoEK0JPFtyinM_VsDmzHEFIZFpQJaIKmO-c5v0llDDMAbMaWcgqblHYhTtIXoKCN1i7YP90tFhT78R2nuwBPb30w0_4cD-ezHvqxtfxhseVC-xrBcrrcTWiuTmTcLC/jBOWFVIgIXcx4svpe44AkapUUDFptDMUXIn3NaW2lf0",
+                        "filename": "imgonline-com-ua-twotoone-pEaTdNIUKT.png",
+                        "size": 11138551,
+                        "type": "image/png",
+                        "thumbnails": {
+                            "small": {
+                                "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/4jBx-7n5sgDaqq7Thy86FA/eS3sjNRSlUYWyFOZYIXnCWeZqocS2RDsUfajnyKsLfciR1zrK1pA5sFdwmuvZKYKCyX-opYYvK6wBWmuS9jTei-edHtXMcs8aOrFKIzcs4lyxE_J39iG0Dp90me_77fAeolcI2vl57unPIBTSGjJNg/9iavre4jYHmacn6PL10F42tmZLvIsVsZpBYERNj7EIs",
+                                "width": 63,
+                                "height": 36
+                            },
+                            "large": {
+                                "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/DLOHVqK-x_TzPKzNFNqj5g/GK7GMGN4cDLQTqDEc04G1BAcBs4UGRLQVWHqRBnvPtpBjrgulwl7djFuX6cPo0pFrbrKsf8UvkEMO6PYE4uXgmD782ab8PyQW6D9Tjo16gYc8cwM75s4Ymzoc3b_M2LE4IohGqvNVRxTDIfWgJsjsA/I4S5bxP-RZVMHNn3rYNO4c4QbSxsoqQXdeajzlht9Yk",
+                                "width": 902,
+                                "height": 512
+                            },
+                            "full": {
+                                "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/TVyIoTWjQYV-nOguAfyNbQ/sY2ySHGSadRZDBi75z_KTCh9g9mTtnrrQHVR5DbYJYP-hfJWkMr3IC8aMo8QsQRe-EQ3gKAMj-s3qNiypFwMptEHih6jOsjt6SjEhJqmk4k9jFVDTquJxYeKx9mZU6qRf7GcpCD1YJfE7p1E00wdig/PNyqQsBFZKU2-R_Bd2JO7D9yytsadgH76_mu1coT_z8",
+                                "width": 3000,
+                                "height": 3000
+                            }
+                        }
+                    }
+                ],
+                "Series": "Quadratura_ / Pozzo",
+                "Medium": "oil on canvas",
+                "Size": "72  x 53 inches",
+                "Availability": "Painting Sold -digital print available"
+            }
+        },
+        {
+            "id": "rec2sO1e7nbSB2ukw",
+            "createdTime": "2024-04-28T11:41:52.000Z",
+            "fields": {
+                "Title": "W.Rabbit - Corner II",
+                "ArtID": "W.R0371",
+                "Exhibition name": "EX LIBRIS",
+                "Year": 2011,
+                "Date Group": "2011-2020",
+                "Digital/Painting": "Painting",
+                "Image/Video": [
+                    {
+                        "id": "attuphjAn8MJesBUi",
+                        "width": 425,
+                        "height": 266,
+                        "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/cxp7c9zpztopqUH8fV4F9w/VnjKRD_Nddoto4IwSF8t-j2teNow4erZCW25US-PAGGsdIVRXEEkriaXfjd0nshWLidu2TV3hx8K-Tj9oFLWEYnGnu4hutPxAInqMOfc6Pi-Xz9isbysU1VNayRQ07WQHcoD-_-1EWYgQ4DVxjKSIw/TniqMnOWxODM_KTjioJ1_n53Uy1dLE-EL01xh4nvL1o",
+                        "filename": "8452.jpg",
+                        "size": 44640,
+                        "type": "image/jpeg",
+                        "thumbnails": {
+                            "small": {
+                                "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/_e9mTCiaddP9rt2E6MgGhg/4b-hCpK5qv3fd_Ra9EJsgNz7L59QVoLsrhAnjLnf1NHk1XDN2JvuJMe0aGxMXUaOB2ZRLpACh-kQnQrR4D5Gs9bDfsdW1eyLyIKJzQdjNM8L9p-DNxDxdFOOqO9LpTpeMOZMgijArgFlPAqNZPQilA/9u-Djs5LwYGgF3iJcE4-5Oxr42eOPZ-c1Qhiw-TY360",
+                                "width": 58,
+                                "height": 36
+                            },
+                            "large": {
+                                "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/g7Ugcr_rdGmR36KV8z_mGw/oXlU0Wk--4guQibqdcZXzXTG6L3Ef6p9I96rs8wadEoCuVkTTRKgzaNfpIurakdIhawn-JJ7HsgOPZIhiIp-ueVSKpeaf6CbOZ8C06oW2aeNrs8GvsHM3sINzYxs0YL3atuyompLYVhQImCCIK524A/HPFbfZlYoWwWIyZT3jBjp4V4UinsxH7yTwBoFXB31mM",
+                                "width": 425,
+                                "height": 266
+                            },
+                            "full": {
+                                "url": "https://v5.airtableusercontent.com/v3/u/28/28/1715299200000/rrj2pXx1Bjh9SXiEVjre8w/zgqIqDbbLVvPgUqs97pfKa5KngCMU28t2Jl8MhSjCygGcidc1tYq9bvBaouc1Xk8ykVfi6VcWTXoSkeFoizupveXupFRBRChFju9u-VI3fxtC_dFI9q6kb5muJd1lguwPuZs-Dv6YUIHCR7_VHqovQ/rpq3onqMD__zSNvLMddGhvpwNmL1MnWeBv3_LgHyW7g",
+                                "width": 3000,
+                                "height": 3000
+                            }
+                        }
+                    }
+                ],
+                "Series": "Ex Libris",
+                "Subject": [
+                    "Library, animal"
+                ],
+                "Medium": "oil on aluminium panel",
+                "Size": "150 x 240cm",
+                "Availability": "Painting Sold -digital print available"
+            }
+        }
+    ]
+}

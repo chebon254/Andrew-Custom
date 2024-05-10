@@ -235,7 +235,7 @@
     <div class="form">
         <!-- Add event listener to the search form -->
         <form id="searchForm">
-            <input type="search" id="searchInput">
+            <input type="search" id="searchInput" autocomplete="on">
             <button type="submit">Search</button>
         </form>
     </div>
@@ -280,25 +280,17 @@
         <select id="filterSubject" class="filter-select">
             <option value="" disabled selected>Subject</option>
             <option value="">All</option>
-            <optgroup label="Baroque Space, Drapery, Falling Flowers">
-                <option value="Baroque Space">Baroque Space</option>
-                <option value="Drapery">Drapery</option>
-                <option value="Falling Flowers">Falling Flowers</option>
-            </optgroup>
-            <optgroup label="Figurative, Linen">
-                <option value="Figurative">Figurative</option>
-                <option value="Linen">Linen</option>
-            </optgroup>
+            <option value="Baroque Space">Baroque Space</option>
+            <option value="Drapery">Drapery</option>
+            <option value="Falling Flowers">Falling Flowers</option>
+            <option value="Figurative">Figurative</option>
+            <option value="Linen">Linen</option>
             <option value="Books">Books</option>
             <option value="Library">Library</option>
-            <optgroup label="Library, Falling Flowers">
-                <option value="Library">Library</option>
-                <option value="Falling Flowers">Falling Flowers</option>
-            </optgroup>
-            <optgroup label="Figurative">
-                <option value="Figurative">Figurative</option>
-                <option value="Coloured">Coloured</option>
-            </optgroup>
+            <option value="Library">Library</option>
+            <option value="Falling Flowers">Falling Flowers</option>
+            <option value="Figurative">Figurative</option>
+            <option value="Coloured">Coloured</option>
         </select>
 
         <select id="filterSeries" class="filter-select">
@@ -424,7 +416,7 @@
                         columnElement.appendChild(itemElement);
 
                         // Start a new column every 2 images
-                        if ((index + 1) % 2 === 0) {
+                        if ((index + 1) % 2.5 === 0) {
                             columnIndex++;
                             columnElement = document.createElement('div');
                             columnElement.classList.add('column');
@@ -502,7 +494,7 @@
             }
         });
 
-        // Function to apply filters
+
         function applyFilters() {
             const yearFilter = document.getElementById('filteryear').value;
             const digitalOrPaintingFilter = document.getElementById('digitalorpainting').value;
@@ -511,16 +503,15 @@
             const subjectFilter = document.getElementById('filterSubject').value;
             const seriesFilter = document.getElementById('filterSeries').value;
 
-            // Constructing the filter query
             let filterQuery = '';
             let filters = [];
 
             if (yearFilter) {
-                if (yearFilter === '2000-2010') {
+                if (yearFilter === '2000 - 2010') {
                     filters.push(`AND(Year >= 2000, Year <= 2010)`);
-                } else if (yearFilter === '2010-2020') {
+                } else if (yearFilter === '2010 - 2020') {
                     filters.push(`AND(Year >= 2010, Year <= 2020)`);
-                } else if (yearFilter === '2020-present') {
+                } else if (yearFilter === '2020 - Present') {
                     filters.push(`Year >= 2020`);
                 }
             }
@@ -533,14 +524,14 @@
             }
             if (seriesFilter) filters.push(`SEARCH("${seriesFilter}", {Series})`);
 
-            if (filters.length > 0) {
+            // Check if at least one filter is selected
+            if (filters.length > 0 || yearFilter || digitalOrPaintingFilter || exhibitionFilter || availabilityFilter || subjectFilter || seriesFilter) {
                 filterQuery = `&filterByFormula=${encodeURIComponent(`AND(${filters.join(',')})`)}`;
             }
 
             // Display filtered gallery
             displayGallery(filterQuery);
         }
-
 
         // Initial call to populate gallery
         document.addEventListener('DOMContentLoaded', () => displayGallery());
