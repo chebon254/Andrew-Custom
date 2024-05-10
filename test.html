@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airtable Gallery</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1,
+        h3 {
+            text-align: center;
+        }
+
+        /* Gallery Styles */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .column {
+            flex: 30%;
+            /* Adjust the width of each column as needed */
+            padding: 0 4px;
+            /* Add some spacing between columns */
+        }
+
+        .item {
+            border-radius: 5px;
+            border: 4 solid red;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            /* Make the images fill the column width */
+        }
+
+        .item img {
+            width: 100%;
+            height: auto;
+            /* Maintain aspect ratio */
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .item img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Filters */
+        .filters {
+            margin-bottom: 20px;
+        }
+
+        .filter-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .filter-select {
+            margin-bottom: 10px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #f0f0f0;
+        }
+
+        .tab.active {
+            background-color: #ccc;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            /* Allow modal to scroll */
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #888;
+            max-width: 90%;
+            position: relative;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: auto;
+            /* Allow content area to scroll */
+            max-height: calc(100% - 40px);
+            /* Limit content height to fit within modal */
+        }
+
+        .close {
+            color: #fff;
+            background-color: red;
+            border-radius: 50%;
+            padding: 5px;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            background-color: darkred;
+        }
+
+        /* Image and Details */
+        #modalImageContainer {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        #modalDetails {
+            width: 100%;
+        }
+
+        #modalDetails h2,
+        #modalDetails p {
+            text-align: center;
+        }
+
+        /* Custom Form Styles */
+        #enquiryForm {
+            width: 60%;
+        }
+
+        #enquiryForm label {
+            margin-bottom: 10px;
+            text-align: center;
+            display: block;
+        }
+
+        #enquiryForm input[type="text"],
+        #enquiryForm input[type="email"],
+        #enquiryForm textarea,
+        #enquiryForm input[type="submit"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        #enquiryForm input[type="submit"] {
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #enquiryForm input[type="submit"]:hover {
+            background-color: darkred;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h1>Complete Catalog of Works</h1>
+    <h3>Use keyword, subjects, exhibitions to find artwork. Try Digital or Painting in tabs!</h3>
+
+    <div class="filters">
+        <div class="filter-title">Year</div>
+        <div class="tabs year">
+            <div class="tab active" onclick="selectTab('All', 'year')">All</div>
+            <div class="tab" onclick="selectTab('2000-2010', 'year')">2000-2010</div>
+            <div class="tab" onclick="selectTab('2010-2020', 'year')">2010-2020</div>
+            <div class="tab" onclick="selectTab('2020-Present', 'year')">2020-Present</div>
+        </div>
+
+        <div class="filter-title">Digital or Painting</div>
+        <div class="tabs digitalPainting">
+            <div class="tab active" onclick="selectTab('All', 'digitalPainting')">All</div>
+            <div class="tab" onclick="selectTab('Digital', 'digitalPainting')">Digital</div>
+            <div class="tab" onclick="selectTab('Painting', 'digitalPainting')">Painting</div>
+        </div>
+
+        <select id="filterExhibitionName" class="filter-select">
+            <option value="">Exhibition Name</option>
+            <option value="LUSCUS">LUSCUS</option>
+            <option value="MODICUS">MODICUS</option>
+            <option value="OCULAR/SPECULO">OCULAR/SPECULO</option>
+            <option value="OCULAR/FLEURS">OCULAR/FLEURS</option>
+            <option value="LACUNA/ ANAMNESIS">LACUNA/ ANAMNESIS</option>
+            <option value="NEW WORK">NEW WORK</option>
+            <option value="Gold">Gold</option>
+        </select>
+
+        <div class="filter-title">Available for Sale</div>
+        <select id="filterAvailability" class="filter-select">
+            <option value="">All</option>
+            <option value="Painting Sold -digital print available">Painting Sold -digital print available</option>
+            <option value="Painting Available">Painting Available</option>
+            <option value="Print Edition available">Print Edition available</option>
+            <option value="Sold">Sold</option>
+        </select>
+
+        <div class="filter-title">Subject</div>
+        <select id="filterSubject" class="filter-select">
+            <option value="">All</option>
+            <optgroup label="Baroque Space, Drapery, Falling Flowers">
+                <option value="Baroque Space">Baroque Space</option>
+                <option value="Drapery">Drapery</option>
+                <option value="Falling Flowers">Falling Flowers</option>
+            </optgroup>
+            <optgroup label="Figurative, Linen">
+                <option value="Figurative">Figurative</option>
+                <option value="Linen">Linen</option>
+            </optgroup>
+            <option value="Books">Books</option>
+            <option value="Library">Library</option>
+            <optgroup label="Library, Falling Flowers">
+                <option value="Library">Library</option>
+                <option value="Falling Flowers">Falling Flowers</option>
+            </optgroup>
+            <optgroup label="Figurative">
+                <option value="Figurative">Figurative</option>
+                <option value="Coloured">Coloured</option>
+            </optgroup>
+        </select>
+
+        <div class="filter-title">Series</div>
+        <select id="filterSeries" class="filter-select">
+            <option value="">All</option>
+            <option value="Luscus">Luscus</option>
+            <option value="Infrared Baroque">Infrared Baroque</option>
+            <option value="Dutchscapes">Dutchscapes</option>
+            <option value="CUSP">CUSP</option>
+            <option value="Quadratura_ / Pozzo">Quadratura_ / Pozzo</option>
+            <option value="Flooded Baroque">Flooded Baroque</option>
+            <option value="Hunting">Hunting</option>
+            <option value="Luscus_Forest">Luscus_Forest</option>
+            <option value="Figure Studies_White">Figure Studies_White</option>
+            <option value="Horses">Horses</option>
+            <option value="Venus">Venus</option>
+            <option value="Ex Libris">Ex Libris</option>
+            <option value="Macro">Macro</option>
+            <option value="Figures on Linen">Figures on Linen</option>
+            <option value="Ocular Fleur">Ocular Fleur</option>
+            <option value="Baroque spaces / Cloud flora">Baroque spaces / Cloud flora</option>
+            <option value="Birds + Books">Birds + Books</option>
+        </select>
+
+        <button onclick="applyFilters()">Apply Filters</button>
+    </div>
+    <div class="search">
+        <input type="text" id="searchInput">
+        <button onclick="search()">Search</button>
+    </div>
+
+    <div id="gallery" class="gallery">
+        <!-- Column 1 -->
+        <div class="column">
+            <!-- Images for Column 1 go here -->
+        </div>
+        <!-- Column 2 -->
+        <div class="column">
+            <!-- Images for Column 2 go here -->
+        </div>
+        <!-- Add more columns as needed -->
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <div id="modalImageContainer">
+                <img id="modalImage" class="full-image" src="" alt="Modal Image" style="width: 100%;">
+            </div>
+            <div id="modalDetails">
+                <h2 id="modalTitle"></h2>
+                <p id="modalMedium"></p>
+                <p id="modalSize"></p>
+                <p id="modalAvailability"></p>
+            </div>
+            <h2 style="margin-top: 80px; text-align: center;">Enquire about this artwork</h2>
+            <p style="text-align: center; margin-bottom: 20px;">Commission-based on prior works is sometimes considered
+            </p>
+            <form id="enquiryForm">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" required><br>
+                <label for="phone">Phone Number:</label><br>
+                <input type="text" id="phone" name="phone" required><br>
+                <label for="email">Email Address:</label><br>
+                <input type="email" id="email" name="email" required><br>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" required></textarea><br>
+                <input type="submit" value="Submit Enquiry">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Constants
+        const accessToken = 'patNkyNhVTMFiKXiz.b06ff5b3991622f39b55e55e26b2ce5f70477676101aec12e98087a82174a1f6';
+        const baseId = 'appLTBaBJFNVw60lg';
+        const tableName = 'Grid View';
+        const pageSize = 20; // Adjust as needed
+        let currentPage = 0;
+
+        // Function to fetch data from Airtable
+        async function fetchData(filterQuery = '') {
+            const url = `https://api.airtable.com/v0/${baseId}/${tableName}?pageSize=${pageSize}${filterQuery}`;
+            const response = await fetch(url, { headers: { 'Authorization': `Bearer ${accessToken}` } });
+            const data = await response.json();
+            console.log(data); // Log the fetched data
+            return { records: data.records, totalRecords: data.totalRecords };
+        }
+
+
+        // Function to display gallery items
+        async function displayGallery(filterQuery = '') {
+            const { records, totalRecords } = await fetchData(filterQuery);
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = ''; // Clear previous content
+
+            let columnIndex = 0;
+            let columnElement = document.createElement('div');
+            columnElement.classList.add('column');
+            gallery.appendChild(columnElement);
+
+            records.forEach((record, index) => {
+                const imageUrl = record.fields["Image/Video"][0].url;
+                const title = record.fields.Title;
+                const medium = record.fields.Medium;
+                const size = record.fields.Size;
+                const availability = record.fields.Availability ? 'Available' : 'Sold Out';
+
+                const itemElement = document.createElement('div');
+                itemElement.classList.add('item');
+                itemElement.innerHTML = `
+            <img src="${imageUrl}" alt="${title}" onclick="showArtDetails('${imageUrl}', '${title}', '${medium}', '${size}', '${availability}')">
+        `;
+
+                columnElement.appendChild(itemElement);
+
+                // Start a new column every 4 images (adjust as needed)
+                if ((index + 1) % 4 === 0) {
+                    columnIndex++;
+                    columnElement = document.createElement('div');
+                    columnElement.classList.add('column');
+                    gallery.appendChild(columnElement);
+                }
+            });
+        }
+        // Show artwork details in popup
+        function showArtDetails(imageUrl, title, medium, size, availability) {
+            const modal = document.getElementById('myModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMedium = document.getElementById('modalMedium');
+            const modalSize = document.getElementById('modalSize');
+            const modalAvailability = document.getElementById('modalAvailability');
+
+            modalImage.src = imageUrl;
+            modalTitle.textContent = title;
+            modalMedium.textContent = `Medium: ${medium}`;
+            modalSize.textContent = `Size: ${size}`;
+            modalAvailability.textContent = `Availability: ${availability}`;
+
+            modal.style.display = 'block';
+        }
+
+        // Close the modal popup
+        const closeBtn = document.getElementsByClassName('close')[0];
+        closeBtn.onclick = function () {
+            const modal = document.getElementById('myModal');
+            modal.style.display = 'none';
+        }
+
+        // Handle form submission
+        const form = document.getElementById('enquiryForm');
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const formDataObject = {};
+            formData.forEach((value, key) => {
+                formDataObject[key] = value;
+            });
+
+            const requestBody = {
+                "fields": formDataObject
+            };
+
+            const url = `https://api.airtable.com/v0/${baseId}/Artwork%20Enquiries`;
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                console.log(response);
+
+                if (response.ok) {
+                    alert('Enquiry submitted successfully!');
+                    const modal = document.getElementById('myModal');
+                    modal.style.display = 'none';
+                } else {
+                    const errorMessage = await response.json();
+                    throw new Error(errorMessage.error.message);
+                }
+            } catch (error) {
+                alert(`Error submitting enquiry: ${error.message}`);
+            }
+        });
+
+        // Function to switch tabs
+        function selectTab(tab, category) {
+            const tabs = document.querySelectorAll(`.${category} .tab`);
+            tabs.forEach(t => {
+                t.classList.remove('active');
+                if (t.innerText.trim() === tab.trim()) {
+                    t.classList.add('active');
+                }
+            });
+        }
+
+        // Apply filters based on selection
+        function applyFilters() {
+            const year = document.querySelector('.year .tab.active') ? document.querySelector('.year .tab.active').innerText : '';
+            const digitalPainting = document.querySelector('.digitalPainting .tab.active') ? document.querySelector('.digitalPainting .tab.active').innerText : '';
+            const exhibitionName = document.getElementById('filterExhibitionName').value;
+            const availability = document.getElementById('filterAvailability').value;
+            const subject = document.getElementById('filterSubject').value;
+            const series = document.getElementById('filterSeries').value;
+
+            let filterQuery = `&filterByFormula=AND(
+            ${year !== 'All' ? `FIND('${year}', {Year}) > 0,` : ''}
+            ${digitalPainting !== 'All' ? `{'Digital/ Painting'}='${digitalPainting}',` : ''}
+            ${exhibitionName ? `{'Exhibition Name'} = '${exhibitionName}',` : ''}
+            ${availability ? `{'Availability'} = '${availability}',` : ''}
+            ${subject ? `{'Subject'} = '${subject}',` : ''}
+            ${series ? `{'Series'} = '${series}'` : ''}
+    )`;
+
+            // Clean up trailing commas and close the formula
+            filterQuery = filterQuery.replace(/,\s*\)/g, ')');
+            displayGallery(filterQuery);
+        }
+
+        // Search function
+        function search() {
+            const searchTerm = document.getElementById('searchInput').value.trim();
+            if (searchTerm !== '') {
+                const filterQuery = `&filterByFormula=SEARCH('${searchTerm}', LOWER({Title}))`;
+                displayGallery(filterQuery);
+            } else {
+                applyFilters();
+            }
+        }
+
+        // Initial call to populate gallery
+        document.addEventListener('DOMContentLoaded', () => displayGallery());
+    </script>
+</body>
+
+</html>
