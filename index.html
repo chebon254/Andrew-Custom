@@ -244,9 +244,9 @@
         <select name="years" id="filteryear">
             <option value="" disabled selected>Year</option>
             <option value="">All</option>
-            <option value="">2000 - 2010</option>
-            <option value="">2010 - 2020</option>
-            <option value="">2020 - Present</option>
+            <option value="2000 - 2010">2000 - 2010</option>
+            <option value="2010 - 2020">2010 - 2020</option>
+            <option value="2020 - Present">2020 - Present</option>
         </select>
 
         <select name="digital_or_painting" id="digitalorpainting">
@@ -357,10 +357,10 @@
         const accessToken = 'patNkyNhVTMFiKXiz.b06ff5b3991622f39b55e55e26b2ce5f70477676101aec12e98087a82174a1f6';
         const baseId = 'appLTBaBJFNVw60lg';
         const tableName = 'Grid View';
-        const pageSize = 20;  // Adjust as needed
+        const pageSize = 20; // Adjust as needed
         let currentPage = 0;
 
-        // Function to fetch data from Airtable
+        // Function to fetch data from Airtable with the given filter query
         async function fetchData(filterQuery = '') {
             const url = `https://api.airtable.com/v0/${baseId}/${tableName}?pageSize=${pageSize}${filterQuery}`;
             const response = await fetch(url, { headers: { 'Authorization': `Bearer ${accessToken}` } });
@@ -373,14 +373,24 @@
         searchForm.addEventListener('submit', function (event) {
             event.preventDefault();
             const searchQuery = document.getElementById('searchInput').value.trim();
-            displayGallery(`&filterByFormula=SEARCH("${encodeURIComponent(searchQuery)}", Title)`);
+            if (searchQuery) {
+                const encodedSearchQuery = encodeURIComponent(`LOWER("${searchQuery}")`);
+                const filterQuery = `&filterByFormula=FIND(${encodedSearchQuery}, LOWER({Title}))`;
+                displayGallery(filterQuery);
+            } else {
+                displayGallery(); // If no search query, display all records
+            }
         });
+
 
         // Function to display gallery items
         async function displayGallery(filterQuery = '') {
             const gallery = document.getElementById('gallery');
             const noDataMessage = document.getElementById('noDataMessage');
             const loadingMessage = document.getElementById('loadingMessage');
+
+            // Clear the gallery before displaying new data
+            gallery.innerHTML = '';
 
             // Display loading message
             loadingMessage.textContent = "Loading...";
@@ -391,7 +401,6 @@
 
                 if (records.length === 0) {
                     noDataMessage.textContent = "No data found for the selected filters.";
-                    gallery.innerHTML = ''; // Clear existing gallery content
                 } else {
                     noDataMessage.textContent = ''; // Clear no data message if data is found
 
@@ -415,7 +424,7 @@
 
                         columnElement.appendChild(itemElement);
 
-                        // Start a new column every 2 images
+                        // Start a new column every 2.5 images
                         if ((index + 1) % 2.5 === 0) {
                             columnIndex++;
                             columnElement = document.createElement('div');
@@ -429,8 +438,6 @@
                 console.error(error);
             }
         }
-
-
         // Show artwork details in popup
         function showArtDetails(imageUrl, title, medium, size, availability) {
             const modal = document.getElementById('myModal');
@@ -494,7 +501,6 @@
             }
         });
 
-
         function applyFilters() {
             const yearFilter = document.getElementById('filteryear').value;
             const digitalOrPaintingFilter = document.getElementById('digitalorpainting').value;
@@ -524,8 +530,7 @@
             }
             if (seriesFilter) filters.push(`SEARCH("${seriesFilter}", {Series})`);
 
-            // Check if at least one filter is selected
-            if (filters.length > 0 || yearFilter || digitalOrPaintingFilter || exhibitionFilter || availabilityFilter || subjectFilter || seriesFilter) {
+            if (filters.length > 0) {
                 filterQuery = `&filterByFormula=${encodeURIComponent(`AND(${filters.join(',')})`)}`;
             }
 
@@ -535,7 +540,6 @@
 
         // Initial call to populate gallery
         document.addEventListener('DOMContentLoaded', () => displayGallery());
-
     </script>
 </body>
 
