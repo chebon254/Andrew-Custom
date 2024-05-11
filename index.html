@@ -271,8 +271,8 @@
         <select name="years" id="filteryear">
             <option value="" disabled selected>Year</option>
             <option value="">All</option>
-            <option value="2000 - 2010">2000 - 2010</option>
-            <option value="2010 - 2020">2010 - 2020</option>
+            <option value="2000 - 2009">2000 - 2009</option>
+            <option value="2010 - 2019">2010 - 2019</option>
             <option value="2020 - Present">2020 - Present</option>
         </select>
 
@@ -547,10 +547,10 @@
             let filters = [];
 
             if (yearFilter) {
-                if (yearFilter === '2000 - 2010') {
-                    filters.push(`AND(Year >= 2000, Year <= 2010)`);
-                } else if (yearFilter === '2010 - 2020') {
-                    filters.push(`AND(Year >= 2010, Year <= 2020)`);
+                if (yearFilter === '2000 - 2009') {
+                    filters.push(`AND(Year >= 2000, Year <= 2009)`);
+                } else if (yearFilter === '2010 - 2019') {
+                    filters.push(`AND(Year >= 2010, Year <= 2019)`);
                 } else if (yearFilter === '2020 - Present') {
                     filters.push(`Year >= 2020`);
                 }
