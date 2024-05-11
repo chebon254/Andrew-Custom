@@ -5,143 +5,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airtable Gallery</title>
-    <style>
-        /* General Styles */
+    <style>/* General Styles */
         body {
             font-family: Arial, sans-serif;
         }
-
+        
         h1,
         h3 {
             text-align: center;
         }
-
-        /* Gallery Styles */
-        /* Gallery Styles */
-        /* .gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 1200px;
-    width: 100%;
-    margin: auto;
-} */
+        
         /* Gallery Styles */
         .gallery {
             display: flex;
-            align-items: flex-start;
-            justify-content: space-evenly;
             flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: auto;
         }
-
+        
         .column {
-            width: 100%;
-            max-width: 400px;
-            min-width: 280px;
+            width: 23%;
+            min-width: 200px;
+            margin-bottom: 20px;
         }
-
-
+        
         .item {
             height: 300px;
             border-radius: 5px;
             overflow: hidden;
             position: relative;
             z-index: 0;
-            margin: 20px 10px;
+            margin-bottom: 20px;
             box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
         }
-
-        /* Additional info styling */
-        .item-info {
-            position: absolute;
-            bottom: 0px;
-            width: 100%;
-            z-index: 2;
-            padding: 10px;
-            background-color: #f2f2f2;
-        }
-
-        .item-info h2 {
-            margin-top: 0;
-            margin-bottom: 5px;
-            font-size: 16px;
-        }
-
-        .item-info p {
-            margin: 0;
-            font-size: 14px;
-        }
-
+        
         .item img {
-            width: 100% !important;
+            width: 100%;
+            height: 100%;
             cursor: pointer;
             transition: transform 0.3s ease;
             position: relative;
             z-index: 1;
         }
-
+        
         .item img:hover {
             transform: scale(1.1);
         }
-
+        
         /* Filters */
         .filters {
-            margin-bottom: 20px;
+            margin: 20px auto;
+            max-width: 800px;
         }
-
-        .filter-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .filter-select {
-            margin-bottom: 10px;
-        }
-
-        /* Filters */
-        .filters {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .filters select {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            outline: none;
-            background-color: #fff;
-        }
-
-        .filters button {
-            height: 41px;
-            background-color: #4285f4;
-            color: #fff;
-            padding: 10px 20px !important;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-
-        .tab {
-            padding: 10px 20px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-            background-color: #f0f0f0;
-        }
-
-        .tab.active {
-            background-color: #ccc;
-        }
-
+        
         /* Modal styles */
         .modal {
             display: none;
@@ -154,7 +71,7 @@
             overflow: auto;
             background-color: rgba(0, 0, 0, 0.7);
         }
-
+        
         .modal-content {
             background-color: #fefefe;
             margin: 20px auto;
@@ -167,7 +84,7 @@
             flex-direction: column;
             align-items: center;
         }
-
+        
         .close {
             color: #fff;
             background-color: red;
@@ -185,39 +102,38 @@
             align-items: center;
             justify-content: center;
         }
-
+        
         .close:hover,
         .close:focus {
             background-color: darkred;
         }
-
-        /* Image and Details */
+        
         #modalImageContainer {
             width: 100%;
             margin-bottom: 20px;
         }
-
+        
         #modalDetails {
             width: 100%;
         }
-
+        
         #modalDetails h2,
         #modalDetails p {
             text-align: center;
         }
-
+        
         /* Custom Form Styles */
         #enquiryForm {
             width: 60%;
         }
-
+        
         #enquiryForm label {
             margin-bottom: 10px;
             text-align: center;
             display: block;
             font-weight: 500;
         }
-
+        
         #enquiryForm input[type="text"],
         #enquiryForm input[type="email"],
         #enquiryForm textarea,
@@ -228,22 +144,22 @@
             border-radius: 5px;
             border: 1px solid #ccc;
         }
-
+        
         #enquiryForm textarea {
             height: 100px;
         }
-
+        
         #enquiryForm input[type="submit"] {
             background-color: red;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
+        
         #enquiryForm input[type="submit"]:hover {
             background-color: darkred;
         }
-
+        
         select,
         option,
         .filters button {
@@ -251,56 +167,33 @@
             font-size: 16px;
             font-weight: 500;
         }
-
+        
         select {
             margin: 5px 10px 5px 0px;
         }
-
+        
         .form {
             margin: auto;
             width: 100%;
             max-width: 600px;
             padding: 10px 0px 30px;
         }
-
+        
         .form form input {
             padding: 5px 10px;
             width: 100%;
             min-width: 200px;
             max-width: 500px;
         }
-
+        
         .form form button {
             padding: 5px 10px;
         }
-
+        
         #modalImage {
             width: 100%;
         }
-
-        #searchForm {
-            display: flex;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        #searchInput {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            outline: none;
-            border: 1px solid #ccc;
-        }
-
-        #searchForm button {
-            background-color: #4285f4;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
-
+        </style>
 </head>
 
 <body>
@@ -361,7 +254,6 @@
             <option value="Linen">Linen</option>
             <option value="Books">Books</option>
             <option value="Library">Library</option>
-            <option value="Library">Library</option>
             <option value="Falling Flowers">Falling Flowers</option>
             <option value="Figurative">Figurative</option>
             <option value="Coloured">Coloured</option>
@@ -405,8 +297,7 @@
             </div>
             <div id="modalDetails">
                 <h2 id="modalTitle"></h2>
-                <p id="modalMedium"></p>
-                <p id="modalSize"></p>
+                <p id="modalYear"></p>
                 <p id="modalAvailability"></p>
             </div>
             <h2 style="margin-top: 80px; text-align: center;">Enquire about this artwork</h2>
@@ -425,15 +316,14 @@
             </form>
         </div>
     </div>
-
     <script>
         // Constants
-        const accessToken = 'patNkyNhVTMFiKXiz.b06ff5b3991622f39b55e55e26b2ce5f70477676101aec12e98087a82174a1f6';
-        const baseId = 'appLTBaBJFNVw60lg';
-        const tableName = 'Grid View';
+        const accessToken = 'patPCMq5xfl1Vp0pn.521f28fc760d733ed149729ec53f8ca788be9095fefde43eff331377ad54980c';
+        const baseId = 'appyde7xgU9D1VAOj';
+        const tableName = 'Combined artworks';
         const pageSize = 20; // Adjust as needed
         let currentPage = 0;
-
+    
         // Function to fetch data from Airtable with the given filter query
         async function fetchData(filterQuery = '') {
             const url = `https://api.airtable.com/v0/${baseId}/${tableName}?pageSize=${pageSize}${filterQuery}`;
@@ -441,7 +331,7 @@
             const data = await response.json();
             return { records: data.records, totalRecords: data.totalRecords };
         }
-
+    
         // Event listener for search form submission
         const searchForm = document.getElementById('searchForm');
         searchForm.addEventListener('submit', function (event) {
@@ -455,63 +345,49 @@
                 displayGallery(); // If no search query, display all records
             }
         });
-
-
-
+    
         // Function to display gallery items
         async function displayGallery(filterQuery = '') {
             const gallery = document.getElementById('gallery');
             const noDataMessage = document.getElementById('noDataMessage');
             const loadingMessage = document.getElementById('loadingMessage');
-
+    
             // Clear the gallery before displaying new data
             gallery.innerHTML = '';
-
+    
             // Display loading message
             loadingMessage.textContent = "Loading...";
-
+    
             try {
                 const { records, totalRecords } = await fetchData(filterQuery);
                 loadingMessage.textContent = ''; // Clear loading message
-
+    
                 if (records.length === 0) {
                     noDataMessage.textContent = "No data found for the selected filters.";
                 } else {
                     noDataMessage.textContent = ''; // Clear no data message if data is found
-
+    
                     let columnIndex = 0;
-                    let columnElement = document.createElement('div');
-                    columnElement.classList.add('column');
-                    gallery.appendChild(columnElement);
-
+    
                     records.forEach((record, index) => {
                         const imageUrl = record.fields["Image/Video"][0].url;
                         const title = record.fields.Title;
-                        const medium = record.fields.Medium;
-                        const size = record.fields.Size;
-                        const availability = record.fields.Availability ? 'Available' : 'Sold Out';
-
+                        const year = record.fields.Year;
+                        const availability = record.fields.Availability;
+    
                         const itemElement = document.createElement('div');
                         itemElement.classList.add('item');
                         itemElement.innerHTML = `
-                        <img src="${imageUrl}" alt="${title}" onclick="showArtDetails('${imageUrl}', '${title}', '${medium}', '${size}', '${availability}')">
-                    <div class="item-info">
-                        <div style="flex-grow: 1;"></div> <!-- Added to push content to the bottom -->
-                        <h2>${title}</h2>
-                        <p><strong>Availability:</strong> ${availability ? 'Available' : 'Sold Out'}</p> <!-- Changed this line -->
-                        <p><strong>Medium:</strong> ${medium}</p>
-                    </div>
-                `;
-
-                        columnElement.appendChild(itemElement);
-
-                        // Start a new column every 2.5 images
-                        if ((index + 1) % 2.5 === 0) {
-                            columnIndex++;
-                            columnElement = document.createElement('div');
-                            columnElement.classList.add('column');
-                            gallery.appendChild(columnElement);
-                        }
+                        <img src="${imageUrl}" alt="${title}" onclick="showArtDetails('${imageUrl}', '${title}', '${year}', '${availability}')">
+                        <div class="item-info">
+                            <div style="flex-grow: 1;"></div> <!-- Added to push content to the bottom -->
+                            <h2>${title}</h2>
+                            <p><strong>Year:</strong> ${year}</p>
+                            <p><strong>Availability:</strong> ${availability}</p>
+                        </div>
+                    `;
+    
+                        gallery.appendChild(itemElement);
                     });
                 }
             } catch (error) {
@@ -519,31 +395,30 @@
                 console.error(error);
             }
         }
+    
         // Show artwork details in popup
-        function showArtDetails(imageUrl, title, medium, size, availability) {
+        function showArtDetails(imageUrl, title, year, availability) {
             const modal = document.getElementById('myModal');
             const modalImage = document.getElementById('modalImage');
             const modalTitle = document.getElementById('modalTitle');
-            const modalMedium = document.getElementById('modalMedium');
-            const modalSize = document.getElementById('modalSize');
+            const modalYear = document.getElementById('modalYear');
             const modalAvailability = document.getElementById('modalAvailability');
-
+    
             modalImage.src = imageUrl;
             modalTitle.textContent = title;
-            modalMedium.textContent = `Medium: ${medium}`;
-            modalSize.textContent = `Size: ${size}`;
+            modalYear.textContent = `Year: ${year}`;
             modalAvailability.textContent = `Availability: ${availability}`;
-
+    
             modal.style.display = 'block';
         }
-
+    
         // Close the modal popup
         const closeBtn = document.getElementsByClassName('close')[0];
         closeBtn.onclick = function () {
             const modal = document.getElementById('myModal');
             modal.style.display = 'none';
         }
-
+    
         // Handle form submission
         const form = document.getElementById('enquiryForm');
         form.addEventListener('submit', async function (event) {
@@ -553,11 +428,11 @@
             formData.forEach((value, key) => {
                 formDataObject[key] = value;
             });
-
+    
             const requestBody = {
                 "fields": formDataObject
             };
-
+    
             const url = `https://api.airtable.com/v0/${baseId}/Artwork%20Enquiries`;
             try {
                 const response = await fetch(url, {
@@ -568,7 +443,7 @@
                     },
                     body: JSON.stringify(requestBody)
                 });
-
+    
                 if (response.ok) {
                     alert('Enquiry submitted successfully!');
                     const modal = document.getElementById('myModal');
@@ -581,7 +456,7 @@
                 alert(`Error submitting enquiry: ${error.message}`);
             }
         });
-
+    
         function applyFilters() {
             const yearFilter = document.getElementById('filteryear').value;
             const digitalOrPaintingFilter = document.getElementById('digitalorpainting').value;
@@ -589,10 +464,10 @@
             const availabilityFilter = document.getElementById('filterAvailability').value;
             const subjectFilter = document.getElementById('filterSubject').value;
             const seriesFilter = document.getElementById('filterSeries').value;
-
+    
             let filterQuery = '';
             let filters = [];
-
+    
             if (yearFilter) {
                 if (yearFilter === '2000 - 2009') {
                     filters.push(`AND(Year >= 2000, Year <= 2009)`);
@@ -610,18 +485,78 @@
                 filters.push(`OR(${subjectFilters.join(',')})`);
             }
             if (seriesFilter) filters.push(`SEARCH("${seriesFilter}", {Series})`);
-
+    
             if (filters.length > 0) {
                 filterQuery = `&filterByFormula=${encodeURIComponent(`AND(${filters.join(',')})`)}`;
             }
-
+    
             // Display filtered gallery
             displayGallery(filterQuery);
         }
+    
+        // Function to display gallery items in four columns
+        async function displayGallery(filterQuery = '') {
+            const gallery = document.getElementById('gallery');
+            const noDataMessage = document.getElementById('noDataMessage');
+            const loadingMessage = document.getElementById('loadingMessage');
+    
+            // Clear the gallery before displaying new data
+            gallery.innerHTML = '';
+    
+            // Display loading message
+            loadingMessage.textContent = "Loading...";
+    
+            try {
+                const { records, totalRecords } = await fetchData(filterQuery);
+                loadingMessage.textContent = ''; // Clear loading message
+    
+                if (records.length === 0) {
+                    noDataMessage.textContent = "No data found for the selected filters.";
+                } else {
+                    noDataMessage.textContent = ''; // Clear no data message if data is found
+    
+                    // Divide items into four columns
+                    const columns = Array.from({ length: 4 }, () => document.createElement('div'));
+                    columns.forEach(column => {
+                        column.classList.add('column');
+                        gallery.appendChild(column);
+                    });
+    
+                    let columnIndex = 0;
+    
+                    records.forEach((record, index) => {
+                        const imageUrl = record.fields["Image/Video"][0].url;
+                        const title = record.fields.Title;
+                        const year = record.fields.Year;
+                        const availability = record.fields.Availability;
+                        const escapedTitle = title.replace(/[']/g, "");
 
+                        const itemElement = document.createElement('div');
+                        itemElement.classList.add('item');
+                        itemElement.innerHTML = `
+                        <img src="${imageUrl}" alt="${escapedTitle}" onclick="showArtDetails('${imageUrl}', '${escapedTitle}', '${year}', '${availability}')">
+                        <div class="item-info">
+                            <div style="flex-grow: 1;"></div>
+                            <h2>${title}</h2>
+                            <p><strong>Year:</strong> ${year}</p>
+                            <p><strong>Availability:</strong> ${availability}</p>
+                        </div>
+                    `;
+    
+                        columns[columnIndex].appendChild(itemElement);
+                        columnIndex = (columnIndex + 1) % 4;
+                    });
+                }
+            } catch (error) {
+                loadingMessage.textContent = "An error occurred while fetching data.";
+                console.error(error);
+            }
+        }
+    
         // Initial call to populate gallery
         document.addEventListener('DOMContentLoaded', () => displayGallery());
     </script>
+    
 </body>
 
 </html>
