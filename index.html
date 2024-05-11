@@ -42,7 +42,7 @@
 
 
         .item {
-            height: 400px;
+            height: 300px;
             border-radius: 5px;
             overflow: hidden;
             position: relative;
@@ -51,13 +51,25 @@
             box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
         }
 
+        /* Additional info styling */
         .item-info {
             position: absolute;
             bottom: 0px;
             width: 100%;
             z-index: 2;
-            background-color: white;
             padding: 10px;
+            background-color: #f2f2f2;
+        }
+
+        .item-info h2 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .item-info p {
+            margin: 0;
+            font-size: 14px;
         }
 
         .item img {
@@ -435,7 +447,7 @@
                         const itemElement = document.createElement('div');
                         itemElement.classList.add('item');
                         itemElement.innerHTML = `
-                    <img src="${imageUrl}" alt="${title}">
+                        <img src="${imageUrl}" alt="${title}" onclick="showArtDetails('${imageUrl}', '${title}', '${medium}', '${size}', '${availability}')">
                     <div class="item-info">
                         <div style="flex-grow: 1;"></div> <!-- Added to push content to the bottom -->
                         <h2>${title}</h2>
